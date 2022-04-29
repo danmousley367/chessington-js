@@ -11,7 +11,7 @@ export default class Rook extends Piece {
         const currentSquare = board.findPiece(this)
         const [col, row] = [currentSquare.col, currentSquare.row]
 
-        const checkHasPieceY = (i, col) => {
+        const checkHasPieceY = (i) => {
             if (col > i) {
                 for (let j = i+1; j < col; j++) {
                     if (board.getPiece(Square.at(row, j)) !== undefined) {
@@ -30,7 +30,7 @@ export default class Rook extends Piece {
             }
 
         }
-        const checkHasPieceX = (i, row) => {
+        const checkHasPieceX = (i) => {
             if (row > i) {
                 for (let j = i+1; j < row; j++) {
                     if (board.getPiece(Square.at(j, col)) !== undefined) {
@@ -51,10 +51,10 @@ export default class Rook extends Piece {
         }
         for (let i = 0; i < 8; i++) {
             if (i !== col ) {
-                if (!checkHasPieceY(i, col)) {availableMoves.push(Square.at(row, i))}
+                if (!checkHasPieceY(i)) {availableMoves.push(Square.at(row, i))}
             }
             if (i !== row) {
-                if (!checkHasPieceX(i, row)) {availableMoves.push(Square.at(i, col))}
+                if (!checkHasPieceX(i)) {availableMoves.push(Square.at(i, col))}
             }
         }
         return availableMoves;
