@@ -14,7 +14,14 @@ export default class King extends Piece {
         const getMove = (changeRow, changeCol) => {
             const rowCondition = changeRow > 0 ? (row + changeRow) < 8 : (row + changeRow) >= 0
             const colCondition = changeCol > 0 ? (row + changeCol) < 8 : (row + changeCol) >= 0
-            if (rowCondition && colCondition) {
+            const isFree = () => {
+                if (board.getPiece(Square.at(row+changeRow, col+changeCol)) === undefined) {
+                    return true
+                } else {
+                    return board.getPiece(Square.at(row + changeRow, col+changeCol))
+                }
+            }
+            if (rowCondition && colCondition && (isFree() == true || isFree().player !== this.player)) {
                 availableMoves.push(Square.at(row+changeRow, col+changeCol))
             }
         }
