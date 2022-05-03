@@ -22,6 +22,14 @@ export default class Pawn extends Piece {
             if (row === 1 && !hasPiece(Square.at(row + 2, col))) {
                 availableMoves.push(Square.at(row + 2, col))
             }
+
+            if (hasPiece(Square.at(row + 1, col + 1)) && board.getPiece(Square.at(row+1, col+1)).player === Player.BLACK) {
+                availableMoves.push(Square.at(row-1, col-1))
+            }
+
+            if (hasPiece(Square.at(row + 1, col - 1)) && board.getPiece(Square.at(row+1, col-1)).player === Player.BLACK) {
+                availableMoves.push(Square.at(row+1, col+1))
+            }
         }
 
         if (this.player === Player.BLACK && (row -1 >= 0) && !hasPiece(Square.at(row - 1, col)) ) {
@@ -29,6 +37,14 @@ export default class Pawn extends Piece {
 
             if (row === 6 && !hasPiece(Square.at(row - 2, col))) {
                 availableMoves.push(Square.at(row - 2, col))
+            }
+
+            if (hasPiece(Square.at(row - 1, col - 1)) && board.getPiece(Square.at(row-1, col-1)).player === Player.WHITE) {
+                availableMoves.push(Square.at(row-1, col-1))
+            }
+
+            if (hasPiece(Square.at(row - 1, col + 1)) && board.getPiece(Square.at(row+1, col+1)).player === Player.WHITE) {
+                availableMoves.push(Square.at(row+1, col+1))
             }
         }
 

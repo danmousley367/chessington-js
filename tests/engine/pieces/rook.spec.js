@@ -56,4 +56,15 @@ describe('Rook', () => {
 
         moves.should.not.deep.include(Square.at(4, 7));
     });
+    //
+    // it('can take an opposing piece', () => {
+    //     const rook = new Rook(Player.WHITE);
+    //     const opposingPiece = new Pawn(Player.black);
+    //     board.setPiece(Square.at(4, 4), rook);
+    //     board.setPiece(Square.at(4, 6), opposingPiece);
+    //
+    //     // rook.moveTo(board, Square.at(4, 6))
+    //
+    //     board.findPiece(opposingPiece).should.not.return(Square.at(4, 6))
+    // })
 });

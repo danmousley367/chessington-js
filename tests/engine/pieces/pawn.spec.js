@@ -102,4 +102,15 @@ describe('Pawn', () => {
         moves.should.not.deep.include(Square.at(4, 3));
     });
 
+    it('can move forwards 1 space diagonally to take a piece', () => {
+        const pawn = new Pawn(Player.BLACK);
+        const blockingPiece = new Rook(Player.WHITE);
+        board.setPiece(Square.at(6, 3), pawn);
+        board.setPiece(Square.at(5, 2), blockingPiece);
+
+        const moves = pawn.getAvailableMoves(board);
+
+        moves.should.deep.include(Square.at(5, 2));
+    });
+
 });
