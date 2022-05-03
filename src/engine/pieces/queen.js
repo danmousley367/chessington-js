@@ -12,7 +12,7 @@ export default class Queen extends Piece {
         const [col, row] = [currentSquare.col, currentSquare.row]
 
         const checkHasPieceForwardRight = (a) => {
-            for (let x = 1; x < a; x++) {
+            for (let x = 1; x <= a; x++) {
                 if (board.getPiece(Square.at(row + x, col + x)) !== undefined) {
                     return true
                 }
@@ -21,7 +21,7 @@ export default class Queen extends Piece {
         }
 
         const checkHasPieceForwardLeft = (a) => {
-            for (let x = 1; x < a; x++) {
+            for (let x = 1; x <= a; x++) {
                 if (board.getPiece(Square.at(row+x, col-x)) !== undefined) {
                     return true
                 }
@@ -30,7 +30,7 @@ export default class Queen extends Piece {
         }
 
         const checkHasPieceBackLeft = (a) => {
-            for (let x = 1; x < a; x++) {
+            for (let x = 1; x <= a; x++) {
                 if (board.getPiece(Square.at(row-x, col-x)) !== undefined) {
                     return true
                 }
@@ -39,7 +39,7 @@ export default class Queen extends Piece {
         }
 
         const checkHasPieceBackRight = (a) => {
-            for (let x = 1; x < a; x++) {
+            for (let x = 1; x <= a; x++) {
                 if (board.getPiece(Square.at(row-x, col+x)) !== undefined) {
                     return true
                 }
@@ -49,17 +49,17 @@ export default class Queen extends Piece {
 
         const checkHasPieceY = (i) => {
             if (col > i) {
-                for (let j = i+1; j < col; j++) {
+                for (let j = i; j < col; j++) {
                     if (board.getPiece(Square.at(row, j)) !== undefined) {
-                        return true
+                        return board.getPiece(Square.at(row, j))
                     }
                 }
                 return false
             }
             if (col < i) {
-                for (let j = col+1; j < i; j++) {
+                for (let j = col+1; j <= i; j++) {
                     if (board.getPiece(Square.at(row, j)) !== undefined) {
-                        return true
+                        return board.getPiece(Square.at(row, j))
                     }
                 }
                 return false
@@ -68,17 +68,17 @@ export default class Queen extends Piece {
         }
         const checkHasPieceX = (i) => {
             if (row > i) {
-                for (let j = i+1; j < row; j++) {
+                for (let j = i; j < row; j++) {
                     if (board.getPiece(Square.at(j, col)) !== undefined) {
-                        return true
+                        return board.getPiece(Square.at(j, col))
                     }
                 }
                 return false
             }
             if (row < i) {
-                for (let j = row+1; j < i; j++) {
+                for (let j = row+1; j <= i; j++) {
                     if (board.getPiece(Square.at(j, col)) !== undefined) {
-                        return true
+                        return board.getPiece(Square.at(j, col))
                     }
                 }
                 return false
@@ -119,9 +119,15 @@ export default class Queen extends Piece {
         for (let m = 0; m < 8; m++) {
             if (m !== col) {
                 if (!checkHasPieceY(m)) {availableMoves.push(Square.at(row, m))}
+                else if (checkHasPieceY(m).player !== this.player) {
+                    availableMoves.push(board.findPiece(checkHasPieceY(m)))
+                }
             }
             if (m !== row) {
                 if (!checkHasPieceX(m)) {availableMoves.push(Square.at(m, col))}
+                else if (checkHasPieceX(m).player !== this.player) {
+                    availableMoves.push(board.findPiece(checkHasPieceX(m)))
+                }
             }
         }
 

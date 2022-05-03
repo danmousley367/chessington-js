@@ -73,4 +73,15 @@ describe('Queen', () => {
 
         moves.should.not.deep.include(Square.at(4, 7));
     });
+
+    it('can take opposing pieces', () => {
+        const queen = new Queen(Player.WHITE);
+        const opposingPiece = new Pawn(Player.BLACK);
+        board.setPiece(Square.at(3, 3), queen);
+        board.setPiece(Square.at(3, 6), opposingPiece);
+
+        const moves = queen.getAvailableMoves(board);
+
+        moves.should.deep.include(Square.at(3, 6));
+    });
 });
